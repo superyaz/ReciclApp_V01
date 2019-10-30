@@ -5,6 +5,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import Confirmation from './components/Confirmation';
+import Instructive from './components/Instructive';
+
 
 
 function App() {
@@ -14,6 +17,8 @@ function App() {
         <Route exact path="/" component={Home}/>
         <Route exact path="/Login" component={Login}/>
         <Route exact path="/Register" component={Register}/>
+        <Route exact path="/Confirmation" component={Confirmation}/>
+        <Route exact path="/Instructive" component={Instructive} />
       </Switch>
     </BrowserRouter>
   );
