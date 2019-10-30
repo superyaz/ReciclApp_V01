@@ -1,19 +1,26 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-//Component App
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
+//Corresponde al Dashboard
+import Dashboard from './screens/Dashboard';
+import Confirmation from './screens/Confirmation';
+import Users from './screens/Users';
+import Signin from './screens/Signin';
+import Collector from './screens/Collector';
+import Appointment from "./screens/Appointment";
 
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/Login" component={Login}/>
-        <Route exact path="/Register" component={Register}/>
+      {/* //Corresponde al Dashboard */}
+        <Route exact path="/" component={Signin} />
+        <Route exact path="/Collector" component={Collector} />
+        <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/Users" component={Users} />
+        <Route exact path="/Confirmation" component={Confirmation} />
+        <Route exact path="/Appointment" component={Appointment} />
       </Switch>
     </BrowserRouter>
   );
