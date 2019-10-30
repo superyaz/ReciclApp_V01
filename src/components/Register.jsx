@@ -92,10 +92,9 @@ class Register extends React.Component{
                             </div>
 
                             <div className="form-group row d-flex justify-content-center mt-3 mb-5">
-                                <Link to="">
+                                <Link to="/Confirmation">
                                     <button type="submit" className="form-control btn btn-lg btn-registrarse" name="registrarse">Registrarse</button>
                                 </Link>
-
                             </div>
                         </form>
                     </div>
