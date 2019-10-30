@@ -8,6 +8,13 @@ import Register from './components/Register';
 import Confirmation from './components/Confirmation';
 import Instructive from './components/Instructive';
 
+//Corresponde al Dashboard
+import Dashboard from './screens/Dashboard';
+import ConfirmationDate from './screens/ConfirmationDate';
+import Users from './screens/Users';
+import Signin from './screens/Signin';
+import Collector from './screens/Collector';
+import Appointment from "./screens/Appointment";
 
 
 function App() {
@@ -19,6 +26,13 @@ function App() {
         <Route exact path="/Register" component={Register}/>
         <Route exact path="/Confirmation" component={Confirmation}/>
         <Route exact path="/Instructive" component={Instructive} />
+      {/* //Corresponde al Dashboard */}
+        <Route exact path="/Home" component={Signin} />
+        <Route exact path="/Collector" component={Collector} />
+        <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/Users" component={Users} />
+        <Route exact path="/ConfirmationDate" component={ConfirmationDate} />
+        <Route exact path="/Appointment" component={Appointment} />
       </Switch>
     </BrowserRouter>
   );
