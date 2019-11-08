@@ -6,25 +6,35 @@ const poolConnection = require('../../../lib/dbConnect');
 
 router.get('/typeDocuments', async(req, res, next) => {
     const documents = await poolConnection.query('SELECT * FROM documents');
-    res.json({documents});
+    res.json({ documents });
 });
 
 router.get('/neighborhoods', async(req, res, next) => {
     const neighborhoods = await poolConnection.query('SELECT * FROM neighborhoods');
-    res.json({neighborhoods});
+    res.json({ neighborhoods });
 });
 
 router.get('/houses', async(req, res, next) => {
     const houses = await poolConnection.query('SELECT * FROM houses');
-    res.json({houses});
+    res.json({ houses });
 });
 
-router.post('/createUser', async (req, res, next) => {
-    let { fullName, numberDocument, mobilePhone, email, password, confirmPassword, addressHome, membersHome,
-         document_id, neighborhood_id, house_id } = req.body;
+router.post('/createUser', async(req, res, next) => {
+    let {
+        fullName,
+        numberDocument,
+        mobilePhone,
+        email,
+        password,
+        addressHome,
+        membersHome,
+        document_id,
+        neighborhood_id,
+        house_id
+    } = req.body;
 
-         /* Este espacio es para realizar las validaciones de los datos
-         antes de que entren o lleguen a la base de datos */
+    /* Este espacio es para realizar las validaciones de los datos
+    antes de que entren o lleguen a la base de datos */
 
     const newUser = {
         fullName,
@@ -32,7 +42,6 @@ router.post('/createUser', async (req, res, next) => {
         mobilePhone,
         email,
         password,
-        confirmPassword,
         addressHome,
         membersHome,
         document_id,

@@ -23,9 +23,12 @@ mysqlPool.getConnection((err, connection) => {
             console.error('DATABASE CONNECTION WAS REFUSED');
         }
     }
-    if (connection) connection.release();
-    console.log('DB is connected')
-    return;
+    
+    if (connection) {
+        connection.release();
+        console.log('BD is Connected');
+        return;
+    }
 });
 
 /* Todo lo que comience con querys puedo aplicarle

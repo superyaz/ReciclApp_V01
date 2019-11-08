@@ -17,7 +17,7 @@ class Register extends React.Component{
            mobilePhone: '',
            email: '',
            password: '',
-           confirmPassword: '',
+        //    confirmPassword: '',
            addressHome: '',
            membersHome: '',
            typeDocument: '',
@@ -47,7 +47,7 @@ class Register extends React.Component{
         this.setState({
             [eventObject.target.name]: eventObject.target.value
         })
-        console.log(eventObject.target.name, eventObject.target.value);
+        // console.log(eventObject.target.name, eventObject.target.value);
         // console.log(this.state.typeDocument);
         // console.log(this.state.neighborhoods);
     }
@@ -62,25 +62,27 @@ class Register extends React.Component{
             mobilePhone: this.state.mobilePhone,
             email: this.state.email,
             password: this.state.password,
-            confirmPassword: this.state.confirmPassword,
+            // confirmPassword: this.state.confirmPassword,
             addressHome: this.state.addressHome,
             membersHome: this.state.membersHome,
             document_id: this.state.typeDocument,
             neighborhood_id: this.state.neighborhood,
-            house_id: this.state.typeHouse,
+            house_id: this.state.typeHouse
         }
-        await axios.post('http://localhost:4000/api/registerUser/createUser', tableUsers);
 
         this.setState({
-            fullName: ' ',
-            numberDocument: ' ',
-            mobilePhone: ' ',
-            email: ' ',
-            password: ' ',
-            confirmPassword: ' ',
-            addressHome: ' ',
-            membersHome: ' '
-        })
+            fullName: '',
+            numberDocument: '',
+            mobilePhone: '',
+            email: '',
+            password: '',
+            // confirmPassword: '',
+            addressHome: '',
+            membersHome: ''
+        });
+
+        // await axios.post('http://localhost:4000/api/registerUser/createUser', tableUsers);
+        await axios.post('http://localhost:4000/api/authentication/signup', tableUsers);
     }
 
     render(){
@@ -132,14 +134,14 @@ class Register extends React.Component{
                                 <input onChange={this.onSelectAndInputChange} value={this.state.email} type="email" className="form-control" name="email" placeholder="Email" required/>
                             </div>
                             <div className="form-group row">
-                                <div className="col-12 col-md-6">
+                                <div className="col-12 col-md-12">
                                     <h6>Contraseña</h6>
                                     <input onChange={this.onSelectAndInputChange} value={this.state.password} type="password" className="form-control" name="password" placeholder="Contraseña" id="" required/>
                                 </div>
-                                <div className="col-12 col-md-6">
+                                {/* <div className="col-12 col-md-6">
                                     <h6>Confirmar Contraseña</h6>
                                     <input onChange={this.onSelectAndInputChange} value={this.state.confirmPassword} type="password" className="form-control" name="confirmPassword" placeholder="Confirmar Contraseña" required/>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="form-group row">
                                 <div className="col-12 col-md-6">
