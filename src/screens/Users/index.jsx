@@ -49,14 +49,11 @@ export class index extends PureComponent {
                                         </tr>
                                     )
                                 })}
-
                             </tbody>
                         </table>
                     </div>
-
                 </div>
             </div>
-
         );
     }
 }
