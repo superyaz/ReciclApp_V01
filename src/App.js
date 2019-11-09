@@ -15,18 +15,20 @@ import Users from './screens/Users';
 import Signin from './screens/Signin';
 import Collector from './screens/Collector';
 import Appointment from "./screens/Appointment";
+import Scanner from './components/Scanner';
 
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/Login" component={Login}/>
-        <Route exact path="/Register" component={Register}/>
-        <Route exact path="/Confirmation" component={Confirmation}/>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/Login" component={Login} />
+        <Route exact path="/Register" component={Register} />
+        <Route exact path="/Confirmation" component={Confirmation} />
         <Route exact path="/Instructive" component={Instructive} />
-      {/* //Corresponde al Dashboard */}
+        <Route exact path="/Scanner" component={Scanner} />
+        {/* //Corresponde al Dashboard */}
         <Route exact path="/Home" component={Signin} />
         <Route exact path="/Collector" component={Collector} />
         <Route exact path="/Dashboard" component={Dashboard} />
