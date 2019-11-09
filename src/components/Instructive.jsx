@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import '../styles/Instructive.css'
 
 class Instructive extends React.Component{
 
@@ -28,8 +29,8 @@ class Instructive extends React.Component{
                             </div>
 
                             <div className="row justify-content-center mb-4">
-                                <Link to=''>
-                                    <button type="submit" className="form-control btn btn-lg btn-scanner" name="Scanner">Escanear</button>
+                                <Link to='/RegisterMaterial'>
+                                    <button type="submit" className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Registro de Material</button>
                                 </Link>
                             </div>  
                         </div>
