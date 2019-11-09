@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { Datatable } from "@o2xp/react-datatable";
 import Header from '../common/components/Header';
 
-
 let options = {
     keyColumn: 'id',
     data: {
