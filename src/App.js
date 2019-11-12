@@ -7,7 +7,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Confirmation from './components/Confirmation';
 import Instructive from './components/Instructive';
-
+import RegisterMaterial from './components/RegisterMaterial'
+import List from './components/List'
 //Corresponde al Dashboard
 import Dashboard from './screens/Dashboard';
 import ConfirmationDate from './screens/ConfirmationDate';
@@ -26,6 +27,8 @@ function App() {
         <Route exact path="/Register" component={Register}/>
         <Route exact path="/Confirmation" component={Confirmation}/>
         <Route exact path="/Instructive" component={Instructive} />
+        <Route exact path="/RegisterMaterial" component={RegisterMaterial}/>
+        <Route exact path="/List" component={List}/>
       {/* //Corresponde al Dashboard */}
         <Route exact path="/Home" component={Signin} />
         <Route exact path="/Collector" component={Collector} />
