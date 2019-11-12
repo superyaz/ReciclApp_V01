@@ -91,7 +91,7 @@ class Register extends React.Component{
             <div className="container">
                 <div className="row">
                     <div className="col overflow-auto">
-                        <div className="row">
+                        <div className="row d-flex justify-content-center">
                             <div className="col-12 col-md-6 mb-4">
                                 <Link to='/'>
                                     <img src="../../document/logo.jpg" className="logo" alt=""/>
@@ -126,7 +126,7 @@ class Register extends React.Component{
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <h6>Número de Documento</h6>
-                                    <input onChange={this.onSelectAndInputChange} value={this.state.numberDocument} type="text" className="form-control" name="numberDocument" placeholder="Numero de Documento" required/>
+                                    <input onChange={this.onSelectAndInputChange} value={this.state.numberDocument} type="number" className="form-control" name="numberDocument" placeholder="Numero de Documento" required/>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -185,7 +185,7 @@ class Register extends React.Component{
                             </div>
 
                             <div className="form-group row d-flex justify-content-center mt-3 mb-5">
-                                <button type="submit" className="form-control btn btn-lg btn-registrarse" name="registrarse">Registrarse</button>
+                                <button type="submit" className="btn btn-lg btn-registrarse" name="registrarse">Registrarse</button>
                                 {/* <Link to="">
                                 </Link> */}
                             </div>
