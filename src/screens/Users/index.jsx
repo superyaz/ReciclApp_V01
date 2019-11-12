@@ -1,27 +1,26 @@
 import React, { PureComponent } from 'react';
 import Header from '../common/components/Header';
 import Sidenav from '../common/components/Sidenav';
+import axios from 'axios';
 
 export class index extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            AllUsersRegistered: []
         }
     }
-   /*  componentDidMount() {
-        this.fetchUsers();
+
+    async componentDidMount(){
+        const responseAllUsersRegistered = await axios.get('http://localhost:4000/api/getUser/users');
+        
+        this.setState({
+            AllUsersRegistered: responseAllUsersRegistered.data.users
+        })
+        // console.log(this.state.AllUsersRegistered);
     }
 
-    fetchUsers = async () => {
-        const response = await fetch('http://localhost:4000/api/usersForm');
-        const users = await response.json();
-        this.setState({ users })
-    } */
-
     render() {
-        const { users } = this.state;
-
         return (
             <div>
                 <Header />
@@ -32,23 +31,23 @@ export class index extends PureComponent {
                         <table className="table table-striped table-sm mt-5">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Id</th>
-                                    <th>Email</th>
+                                    <th>Numero Documento</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Correo Electronico</th>
+                                    <th>Fecha Registro</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {users.map((user, index) => {
-                                    return (
-                                        <tr key={user.id}>
-                                            <td>{index + 1}</td>
-                                            <td>{user.fullName}</td>
-                                            <td>{user.numberDocument}</td>
-                                            <td>{user.email}</td>
-                                        </tr>
-                                    )
-                                })}
+                                {
+                                    this.state.AllUsersRegistered.map( users => {
+                                        return (
+                                            <tr key={users.id}>
+                                                <td>{users.numberDocument}</td>
+                                                <td>{users.fullName}</td>
+                                                <td>{users.email}</td>
+                                                <td>{users.created_at}</td>
+                                            </tr>)})
+                                }
                             </tbody>
                         </table>
                     </div>

@@ -1,8 +1,11 @@
+require('dotenv').config();
 const { Router } = require('express');
+const jwt = require('jsonwebtoken');
 const router = Router();
 
 /* Hace referencia a la conexion de la BD */
 const poolConnection = require('../../../lib/dbConnect');
+const { encryptPassword, matchPassword } = require('../../../lib/helpers');
 
 router.get('/typeDocuments', async(req, res, next) => {
     const documents = await poolConnection.query('SELECT * FROM documents');
@@ -46,13 +49,27 @@ router.post('/createUser', async(req, res, next) => {
         membersHome,
         document_id,
         neighborhood_id,
-        house_id
+        house_id,
         // user_id: req.user.id //aqui toma la session del usuario
         // que se definio de forma global.
     }
 
+    /* Antes de guardar el usuario cifro la contraseña */
+    newUser.password = await encryptPassword(password);
+
+    /* Darle a la BD el objeto para que lo almacene, pero para eso debo traerme la conexion a la BD, a través de pool*/
+    const registro = await poolConnection.query('INSERT INTO users SET ?', [newUser]);
+
+    if (newUser.email) {
+        let token = jwt.sign({
+            usuarioDB: newUser
+        }, process.env.SECRETE_KEY, { expiresIn: process.env.FINAL_TOKEN });
+
+        console.log(token);
+    }
+
     console.log(newUser);
-    // await poolConnection.query('INSERT INTO users SET ?', [newUser]);
+    console.log(registro);
 });
 
 module.exports = router;

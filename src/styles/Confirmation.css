@@ -1,47 +1,44 @@
-
-.card-principal{
+.card-principal {
     margin-top: 10px;
 }
 
-.card{
+.card {
     border: 1px solid #ccc;
 }
 
-.card-title{
+.card-title {
     display: flex;
     justify-content: center;
     color: #f2f2f2 !important;
-    background-color: #c27333  !important;
+    background-color: #c27333 !important;
 }
 
-.card-body{
-    background-color: #c27333  !important;
+.card-body {
+    background-color: #c27333 !important;
 }
 
-.card-body ::-webkit-input-placeholder{
+.card-body ::-webkit-input-placeholder {
     direction: rtl;
     text-align: center;
     font-size: 25px;
 }
 
-.card-text{
-    background-color: #c27333 !important;    
+.card-text {
+    background-color: #c27333 !important;
     color: #f2f2f2;
     font-size: 18px;
 }
 
-.boton{
+.boton {
     background-color: #c27333 !important;
 }
 
-.btn-continuar{
-
+.btn-continuar {
     color: #f2f2f2 !important;
     background-color: #33b924 !important;
 }
 
-.btn-continuar:hover{
-
+.btn-continuar:hover {
     color: #f2f2f2 !important;
     background-color: #33b924a8!important;
 }
