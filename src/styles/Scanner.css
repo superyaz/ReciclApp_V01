@@ -1,3 +1,32 @@
 #scanner {
-    text-align: center;
+  text-align: center;
+}
+
+#codigo {
+  text-align: center;
+}
+
+#btnRegresar {
+  text-align: center;
+}
+
+body {
+  margin-top: 20px;
+  background-color: #f1f4f9;
+}
+
+h1 {
+  text-align: center;
+}
+
+video {
+  width: calc(40%);
+  margin: auto auto auto auto;
+  border-radius: 10px;
+}
+
+canvas {
+  width: calc(10%);
+  height: calc(10%);
+  position: absolute;
 }
