@@ -15,6 +15,11 @@ INSERT INTO `documents` (`id`, `typeDocument`, `created_at`) VALUES (NULL, 'Tarj
 INSERT INTO `houses` (`id`, `typeHouse`, `created_at`) VALUES (NULL, 'Hogar', CURRENT_TIMESTAMP),(NULL, 'Oficina', CURRENT_TIMESTAMP), (NULL, 'Empresa', CURRENT_TIMESTAMP);
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+-- INGRESANDO TIPOS DE MATERIAL =>
+-- TIPOS DE MATERIAL =>
+INSERT INTO `typeMaterial` (`id`, `typeMaterial`, `created_at`) VALUES (NULL, 'Carton', CURRENT_TIMESTAMP),(NULL, 'Papel', CURRENT_TIMESTAMP), (NULL, 'Plastico', CURRENT_TIMESTAMP), (NULL, 'Vidrio', CURRENT_TIMESTAMP), (NULL, 'Electronico', CURRENT_TIMESTAMP);
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 -- INGRESANDO LOS BARRIOS => 
 -- COMUNA #1
 INSERT INTO `neighborhoods` (`id`, `neighborhood`, `created_at`) VALUES (NULL, 'Aldea Pablo VI', CURRENT_TIMESTAMP),(NULL, 'Carpinelo', CURRENT_TIMESTAMP), (NULL, 'El Compromiso', CURRENT_TIMESTAMP),(NULL, 'Granizal', CURRENT_TIMESTAMP),(NULL, 'La Avanzada', CURRENT_TIMESTAMP),(NULL, 'La Esperanza Nº 2', CURRENT_TIMESTAMP),(NULL, 'Moscú Nº 2', CURRENT_TIMESTAMP),(NULL, 'Popular Nº 1', CURRENT_TIMESTAMP),(NULL, 'Popular Nº 2', CURRENT_TIMESTAMP),(NULL, 'Santo Domingo Savio Nº 1', CURRENT_TIMESTAMP),(NULL, 'Santo Domingo Savio Nº 2', CURRENT_TIMESTAMP),(NULL, 'San Pablo', CURRENT_TIMESTAMP),(NULL, 'Villa Guadalupe', CURRENT_TIMESTAMP);

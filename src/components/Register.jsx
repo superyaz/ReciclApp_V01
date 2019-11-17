@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import axios from 'axios'
 import '../styles/Login.css'
 
@@ -17,7 +17,6 @@ class Register extends React.Component{
            mobilePhone: '',
            email: '',
            password: '',
-        //    confirmPassword: '',
            addressHome: '',
            membersHome: '',
            typeDocument: '',
@@ -48,13 +47,9 @@ class Register extends React.Component{
             [eventObject.target.name]: eventObject.target.value
         })
         // console.log(eventObject.target.name, eventObject.target.value);
-        // console.log(this.state.typeDocument);
-        // console.log(this.state.neighborhoods);
     }
 
-    onSubmit = async (eventObject) => {
-        eventObject.preventDefault();
-        
+    onSubmit = async () => {
         /* Enviando la data al backend */
         const tableUsers = {
             fullName: this.state.fullName,
@@ -62,7 +57,6 @@ class Register extends React.Component{
             mobilePhone: this.state.mobilePhone,
             email: this.state.email,
             password: this.state.password,
-            // confirmPassword: this.state.confirmPassword,
             addressHome: this.state.addressHome,
             membersHome: this.state.membersHome,
             document_id: this.state.typeDocument,
@@ -76,13 +70,16 @@ class Register extends React.Component{
             mobilePhone: '',
             email: '',
             password: '',
-            // confirmPassword: '',
             addressHome: '',
             membersHome: ''
         });
+        await axios.post('http://localhost:4000/api/registerUser/createUser', tableUsers);        
+    }
 
-        await axios.post('http://localhost:4000/api/registerUser/createUser', tableUsers);
-        // await axios.post('http://localhost:4000/api/authentication/signup', tableUsers);
+    onClick = (eventObject) => {
+        eventObject.preventDefault();
+        this.onSubmit();
+        this.props.history.push('/login');
     }
 
     render(){
@@ -126,7 +123,7 @@ class Register extends React.Component{
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <h6>Número de Documento</h6>
-                                    <input onChange={this.onSelectAndInputChange} value={this.state.numberDocument} type="number" className="form-control" name="numberDocument" placeholder="Numero de Documento" required/>
+                                    <input onChange={this.onSelectAndInputChange} value={this.state.numberDocument} type="text" className="form-control" name="numberDocument" placeholder="Numero de Documento" required/>
                                 </div>
                             </div>
                             <div className="form-group">
@@ -138,10 +135,6 @@ class Register extends React.Component{
                                     <h6>Contraseña</h6>
                                     <input onChange={this.onSelectAndInputChange} value={this.state.password} type="password" className="form-control" name="password" placeholder="Contraseña" id="" required/>
                                 </div>
-                                {/* <div className="col-12 col-md-6">
-                                    <h6>Confirmar Contraseña</h6>
-                                    <input onChange={this.onSelectAndInputChange} value={this.state.confirmPassword} type="password" className="form-control" name="confirmPassword" placeholder="Confirmar Contraseña" required/>
-                                </div> */}
                             </div>
                             <div className="form-group row">
                                 <div className="col-12 col-md-6">
@@ -180,14 +173,12 @@ class Register extends React.Component{
                             <div className="form-group row">
                                 <div className="col-12 col-md-4">
                                     <h6>Número de Residentes</h6>
-                                    <input onChange={this.onSelectAndInputChange} value={this.state.membersHome} type="text" className="form-control" name="membersHome" placeholder="Tipo de Vivienda" required/>
+                                    <input onChange={this.onSelectAndInputChange} value={this.state.membersHome} type="text" className="form-control" name="membersHome" placeholder="Número de Residentes" required/>
                                 </div>
                             </div>
 
                             <div className="form-group row d-flex justify-content-center mt-3 mb-5">
-                                <button type="submit" className="btn btn-lg btn-registrarse" name="registrarse">Registrarse</button>
-                                {/* <Link to="">
-                                </Link> */}
+                                <button type="submit" onClick={this.onClick} className="btn btn-lg btn-registrarse" name="registrarse">Registrarse</button>
                             </div>
                         </form>
                     </div>
@@ -198,4 +189,4 @@ class Register extends React.Component{
     }
 }
 
-export default Register;
+export default withRouter(Register);

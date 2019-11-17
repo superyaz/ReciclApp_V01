@@ -5,7 +5,7 @@ const router = Router();
 
 /* Hace referencia a la conexion de la BD */
 const poolConnection = require('../../../lib/dbConnect');
-const { encryptPassword, matchPassword } = require('../../../lib/helpers');
+const { encryptPassword, tokenVerify } = require('../../../lib/helpers');
 
 router.get('/typeDocuments', async(req, res, next) => {
     const documents = await poolConnection.query('SELECT * FROM documents');
@@ -50,8 +50,6 @@ router.post('/createUser', async(req, res, next) => {
         document_id,
         neighborhood_id,
         house_id,
-        // user_id: req.user.id //aqui toma la session del usuario
-        // que se definio de forma global.
     }
 
     /* Antes de guardar el usuario cifro la contraseña */
@@ -59,17 +57,13 @@ router.post('/createUser', async(req, res, next) => {
 
     /* Darle a la BD el objeto para que lo almacene, pero para eso debo traerme la conexion a la BD, a través de pool*/
     const registro = await poolConnection.query('INSERT INTO users SET ?', [newUser]);
-
-    if (newUser.email) {
-        let token = jwt.sign({
-            usuarioDB: newUser
-        }, process.env.SECRETE_KEY, { expiresIn: process.env.FINAL_TOKEN });
-
-        console.log(token);
-    }
+    newUser.id = registro.insertId;
 
     console.log(newUser);
-    console.log(registro);
+    res.json({
+        ok: true,
+        userRegistered: newUser
+    });
 });
 
 module.exports = router;

@@ -1,8 +1,35 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import '../styles/Instructive.css'
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import axios from 'axios';
+import { getJwt } from '../helpers/jwt';
+import '../styles/Instructive.css';
 
 class Instructive extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+
+        }
+    }
+
+    componentDidMount() {
+        const jwt = getJwt();
+
+        if(!jwt){
+            return this.props.history.push('/login');
+        }
+
+        axios.get('/products', {
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        }).then(res => res.setState({
+            user: res.data.user
+            
+        })).catch(err => {
+            this.props.history.push('/login');
+        })
+    }
 
     render(){
         return(
@@ -24,15 +51,15 @@ class Instructive extends React.Component{
                                     <ul>
                                         <li className="ml-5">Bolsa para el almacenamiento de materiales de reciclaje.</li>
                                         <li className="ml-5">Pad magnético con el instructivo resumido de separación y clasificación de reciclaje</li>
-                                    </ul>                          
-                                </div>         
+                                    </ul>
+                                </div>
                             </div>
 
                             <div className="row justify-content-center mb-4">
                                 <Link to='/RegisterMaterial'>
                                     <button type="submit" className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Registro de Material</button>
                                 </Link>
-                            </div>  
+                            </div>
                         </div>
                     </div>
                 </div> 
@@ -41,4 +68,4 @@ class Instructive extends React.Component{
     }
 }
 
-export default Instructive;
+export default withRouter(Instructive);
