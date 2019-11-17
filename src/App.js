@@ -9,6 +9,7 @@ import Confirmation from './components/Confirmation';
 import Instructive from './components/Instructive';
 import RegisterMaterial from './components/RegisterMaterial'
 import List from './components/List'
+import Schedule from './components/Schedule'
 //Corresponde al Dashboard
 import Dashboard from './screens/Dashboard';
 import ConfirmationDate from './screens/ConfirmationDate';
@@ -29,6 +30,7 @@ function App() {
         <Route exact path="/Instructive" component={Instructive} />
         <Route exact path="/RegisterMaterial" component={RegisterMaterial}/>
         <Route exact path="/List" component={List}/>
+        <Route exact path="/Schedule" component={Schedule}/>
       {/* //Corresponde al Dashboard */}
         <Route exact path="/Home" component={Signin} />
         <Route exact path="/Collector" component={Collector} />
