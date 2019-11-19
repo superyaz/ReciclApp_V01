@@ -17,6 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 /* User Routes */
 app.use('/api/registerUser', require('./routes/api/user/registerUser'));
 app.use('/api/loginVerify', require('./routes/api/user/loginVerify'));
+app.use('/api/schedule', require('./routes/api/user/schedule'));
 app.use('/api/material', require('./routes/api/user/materialRegister'));
 app.use('/api/product', require('./routes/api/user/products'));
 

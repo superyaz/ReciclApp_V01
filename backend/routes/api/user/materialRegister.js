@@ -2,25 +2,30 @@ const { Router } = require('express');
 const router = Router();
 
 const poolConnection = require('../../../lib/dbConnect');
+const { tokenVerify } = require('../../../lib/helpers')
 
-router.get('/typeMaterials', async(req, res, next) => {
+router.get('/typeMaterials', tokenVerify, async(req, res, next) => {
     const materials = await poolConnection.query('SELECT * FROM typeMaterials');
     res.json({ ok: true, materials });
 });
 
-router.post('/createMaterial', async(req, res, next) => {
+router.post('/createMaterial', tokenVerify, async(req, res, next) => {
+    const client_id = req.usuario.id
     const { codigoScanner, quantity, typeMaterial_id } = req.body;
 
+    const registro = await poolConnection.query('SELECT * FROM appointments WHERE client_id = ?', client_id);
+    const appointment_id = registro[0].id;
+
     const newMaterial = {
-        codigoScanner,
+        codigoBarra: codigoScanner,
         quantity,
-        typeMaterial_id
+        client_id,
+        typeMaterial_id,
+        appointment_id
     }
 
-    // await poolConnection.query('INSERT INTO collects SET ?', [newMaterial]);
-    console.log(codigoScanner, typeMaterial_id, quantity);
+    await poolConnection.query('INSERT INTO collects SET ?', [newMaterial]);
 
-    console.log(newMaterial)
     res.json({
         ok: true,
         materialRegistered: newMaterial

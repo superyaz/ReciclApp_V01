@@ -1,7 +1,8 @@
 import React from 'react';
 import Quagga from 'quagga';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { getJwt } from '../helpers/jwt';
 import '../styles/RegisterMaterial.css';
 
 class RegisterMaterial extends React.Component{
@@ -19,6 +20,24 @@ class RegisterMaterial extends React.Component{
       }
     
       async componentDidMount() {
+        const token = getJwt();
+
+        if(!token){
+          return this.props.history.push('/login');
+        }
+    
+        axios.get('http://localhost:4000/api/material/typeMaterials', {
+            headers: {
+                token: `${token}`
+            }
+        }).then(res => this.setState({
+            typeMaterials: res.data.materials,
+            typeMaterial: res.data.materials[0].id
+        })).catch(err => { 
+            console.log(err);
+            this.props.history.push('/login');
+        })
+
         Quagga.init(
           {
             inputStream: {
@@ -54,13 +73,6 @@ class RegisterMaterial extends React.Component{
             })
             // console.log(this.state.codigoScanner);
         });
-
-        const responseTypeMaterials = await axios.get('http://localhost:4000/api/material/typeMaterials');
-        this.setState({
-            typeMaterials: responseTypeMaterials.data.materials,
-            typeMaterial: responseTypeMaterials.data.materials[0].id
-        });
-        // console.log(this.state.typeMaterial);
     };
 
     onSelectAndInputChange = (eventObject) => {
@@ -70,25 +82,32 @@ class RegisterMaterial extends React.Component{
         // console.log(eventObject.target.name, eventObject.target.value);
     }
 
-    onSubmit = async(eventObject) => {
-        eventObject.preventDefault();
-        
-        /* Enviando la data al backend */
-        const materialAndQuantity = {
-            codigoScanner: this.state.codigoScanner,
-            quantity: this.state.quantityofproducts,
-            typeMaterial_id: this.state.typeMaterial
-        }
-
+    onSubmit = async() => {
         this.setState({
             codigoScanner: '',
             // typeMaterial: '',
             quantityofproducts: ''
         });
-
         document.querySelector("#codigo").innerHTML = '';
-        await axios.post('http://localhost:4000/api/material/createMaterial', materialAndQuantity);
+
+        const token = getJwt();
+        axios.post('http://localhost:4000/api/material/createMaterial', {
+            codigoScanner: this.state.codigoScanner,
+            quantity: this.state.quantityofproducts,
+            typeMaterial_id: this.state.typeMaterial
+        },
+        {
+            headers: {
+                token: `${token}`
+            }
+        }).then(res => console.log(res.data.ok))
     }
+
+    onClick = (eventObject) => {
+        eventObject.preventDefault();
+        this.onSubmit();
+        this.props.history.push('/List');
+      }
 
     render(){
         return(
@@ -125,7 +144,7 @@ class RegisterMaterial extends React.Component{
                             </div>
                             <div className="form-group row">
                                 <div className="col-12">
-                                    <h6>Seleccione tipo de material</h6>
+                                    <h6>Tipo de Material</h6>
                                     <select onChange={this.onSelectAndInputChange} name="typeMaterial" typeof="text" className="form-control" required>
                                         {
                                             this.state.typeMaterials.map(typeMaterial => 
@@ -137,15 +156,14 @@ class RegisterMaterial extends React.Component{
                                 </div>
                             </div>
                             <div className="form-group row">
-                                <div className="col-12 col-md-6">
-                                    <h6>Cantidad de productos correspondiente al material seleccionado</h6>
+                                <div className="col-12">
+                                    <h6>Cantidad</h6>
                                     <input onChange={this.onSelectAndInputChange} value={this.state.quantityofproducts} name="quantityofproducts" type="text" className="form-control" required/>
                                 </div>
                             </div>
                             <div className="form-group row d-flex justify-content-center mt-3 mb-5">
-                                <button type="submit" className="form-control btn btn-lg btn-registrarse" name="registrarse">Ingresar</button>
-                                {/* <Link to="/List">
-                                </Link> */}
+                                <button type="submit" className="btn btn-ln btn-registrarse" name="registrarse">Scannear Otro Material</button>
+                                <button onClick={this.onClick} type="submit" className="btn btn-ln btn-registrarse ml-5" name="registrarse">Listar Materiales</button>
                             </div>
                         </form>
                     </div>
@@ -154,7 +172,6 @@ class RegisterMaterial extends React.Component{
             </React.Fragment>
         )
     }
-  
 }
 
-export default RegisterMaterial;
+export default withRouter(RegisterMaterial);

@@ -2,21 +2,16 @@ const { Router } = require('express');
 const router = Router();
 
 const poolConnection = require('../../../lib/dbConnect');
+const { tokenVerify } = require('../../../lib/helpers');
 
-router.get('/listProducts', async(req, res, next) => {
-    // const productsDB = poolConnection.query('SELECT');
-    res.json({
-        // productsDB
-    });
-});
+router.get('/listProducts', tokenVerify, async(req, res, next) => {
+    const client_id = req.usuario.id;
 
-router.delete('/deleteProduct/:id', async(req, res, next) => {
-    const { id } = req.params;
-    // const productDB = await poolConnection.query('DELETE');
+    const productsDB = await poolConnection.query('SELECT collects.id, codigoBarra, typeMaterials.typeMaterial, quantity FROM collects INNER JOIN typeMaterials ON collects.typeMaterial_id = typeMaterials.id WHERE collects.client_id = ?', client_id);
 
     res.json({
-        id,
-        // productDB
+        ok: true,
+        productsDB
     });
 });
 

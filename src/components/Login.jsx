@@ -1,20 +1,19 @@
-import React from 'react'
-import { withRouter } from 'react-router-dom'
-import '../styles/Login.css'
-import axios from 'axios'
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/Login.css';
 
 class Login extends React.Component{
     constructor(props){
        super(props);
        this.state = {
            email: '',
-           password: '',
+           password: ''
        }
     }
     
     onSubmit = () => {
         // eventObject.preventDefault();
-
         this.setState({
             email: '',
             password: ''

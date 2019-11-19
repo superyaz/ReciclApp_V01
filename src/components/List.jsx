@@ -1,7 +1,8 @@
-import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import axios from 'axios'
-import '../styles/List.css'
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { getJwt } from '../helpers/jwt';
+import axios from 'axios';
+import '../styles/List.css';
 
 class List extends React.Component{
     constructor(props){
@@ -11,21 +12,26 @@ class List extends React.Component{
         }
     }
 
-    async componentDidMount() {
-        const responseProductsList = await axios.get('http://localhost:4000/api/product/listProducts');
+    componentDidMount() {
+        const token = getJwt();
 
-        this.setState({
-            productsList: responseProductsList.data.productsDB
-        });
+        if(!token){
+            return this.props.history.push('/login');
+        }
+
+        axios.get('http://localhost:4000/api/product/listProducts', {
+            headers: {
+                token: `${token}`
+            }
+        }).then(res => this.setState({
+            productsList: res.data.productsDB
+        })).catch(err => {
+            this.props.history.push('/login');
+        })
     }
 
-    onSubmit = () => {
-        console.log('HOLA SOY EL SUBMIT');
-    }
-    
     onClick = (eventObject) => {
         eventObject.preventDefault();
-        this.onSubmit();
         this.props.history.push('/');
     }
 
@@ -49,27 +55,28 @@ class List extends React.Component{
                                             <th className="text-center">Cantidad</th>
                                         </tr>
                                     </thead>
-
                                     <tbody>
-                                        <tr>
-                                            <th className="text-center">111111</th>
-                                            <th className="text-center">Carton</th>
-                                            <th className="text-center">10</th>
-                                            <th className="text-center"><button type="submit" className="btn btn-eliminar">Eliminar</button></th>
-                                        </tr>
-                                        <tr>
-                                            <th className="text-center">222222</th>
-                                            <th className="text-center">Plastico</th>
-                                            <th className="text-center">10</th>
-                                            <th className="text-center"><button type="submit" className="btn btn-eliminar">Eliminar</button></th>
-                                        </tr>
+                                        {
+                                            this.state.productsList.map(listMaterial => {
+                                                return(
+                                                    <tr key={listMaterial.id}>
+                                                        <th className="text-center">{listMaterial.codigoBarra}</th>
+                                                        <th className="text-center">{listMaterial.typeMaterial}</th>
+                                                        <th className="text-center">{listMaterial.quantity}</th>
+                                                        {/* <th className="text-center"><button type="submit" className="btn btn-eliminar">Eliminar</button></th> */}
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
-                                </table> 
+                                </table>
                             </div>
-                            <div className="row d-flex justify-content-center mt-5"><button type="submit" className="btn btn-lg">Continuar</button></div>
+                            <div className="row d-flex justify-content-center mt-5">
+                                <button onClick={this.onClick} className="ml-5 mb-5 btn btn-lg">Continuar</button>
+                            </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </React.Fragment>
         )
     }

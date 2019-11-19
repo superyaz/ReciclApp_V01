@@ -5,7 +5,7 @@ const router = Router();
 
 /* Hace referencia a la conexion de la BD */
 const poolConnection = require('../../../lib/dbConnect');
-const { encryptPassword, tokenVerify } = require('../../../lib/helpers');
+const { encryptPassword } = require('../../../lib/helpers');
 
 router.get('/typeDocuments', async(req, res, next) => {
     const documents = await poolConnection.query('SELECT * FROM documents');

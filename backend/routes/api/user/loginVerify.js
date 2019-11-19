@@ -35,7 +35,7 @@ router.post('/loginUser', async(req, res, next) => {
         }, process.env.SECRETE_KEY, { expiresIn: 60 * 60 * 24 * 30 * 60 });
     }
 
-    console.log(userDB);
+    // console.log(userDB);
     res.json({
         ok: true,
         usuarioDB: userDB,

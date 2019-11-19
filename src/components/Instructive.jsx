@@ -1,36 +1,8 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import axios from 'axios';
-import { getJwt } from '../helpers/jwt';
 import '../styles/Instructive.css';
 
 class Instructive extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-
-        }
-    }
-
-    componentDidMount() {
-        const jwt = getJwt();
-
-        if(!jwt){
-            return this.props.history.push('/login');
-        }
-
-        axios.get('/products', {
-            headers: {
-                Authorization: `Bearer ${jwt}`
-            }
-        }).then(res => res.setState({
-            user: res.data.user
-            
-        })).catch(err => {
-            this.props.history.push('/login');
-        })
-    }
-
     render(){
         return(
             <React.Fragment>
@@ -56,13 +28,13 @@ class Instructive extends React.Component{
                             </div>
 
                             <div className="row justify-content-center mb-4">
-                                <Link to='/RegisterMaterial'>
-                                    <button type="submit" className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Registro de Material</button>
+                                <Link to='/Schedule'>
+                                    <button className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Agendar O Entregar Personalmente</button>
                                 </Link>
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </React.Fragment>
         )
     }
