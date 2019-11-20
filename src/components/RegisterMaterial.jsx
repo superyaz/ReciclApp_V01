@@ -82,7 +82,9 @@ class RegisterMaterial extends React.Component{
         // console.log(eventObject.target.name, eventObject.target.value);
     }
 
-    onSubmit = async() => {
+    onSubmit = async(eventObject) => {
+        eventObject.preventDefault();
+
         this.setState({
             codigoScanner: '',
             // typeMaterial: '',
@@ -105,7 +107,6 @@ class RegisterMaterial extends React.Component{
 
     onClick = (eventObject) => {
         eventObject.preventDefault();
-        this.onSubmit();
         this.props.history.push('/List');
       }
 
@@ -162,7 +163,7 @@ class RegisterMaterial extends React.Component{
                                 </div>
                             </div>
                             <div className="form-group row d-flex justify-content-center mt-3 mb-5">
-                                <button type="submit" className="btn btn-ln btn-registrarse" name="registrarse">Scannear Otro Material</button>
+                                <button  type="submit" className="btn btn-ln btn-registrarse" name="registrarse">Scannear Otro Material</button>
                                 <button onClick={this.onClick} type="submit" className="btn btn-ln btn-registrarse ml-5" name="registrarse">Listar Materiales</button>
                             </div>
                         </form>

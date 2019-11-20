@@ -20,6 +20,7 @@ app.use('/api/loginVerify', require('./routes/api/user/loginVerify'));
 app.use('/api/schedule', require('./routes/api/user/schedule'));
 app.use('/api/material', require('./routes/api/user/materialRegister'));
 app.use('/api/product', require('./routes/api/user/products'));
+app.use('/api/information', require('./routes/api/user/information'));
 
 /* Admin Routes */
 app.use('/api/getUser', require('./routes/api/admin/getUsers'));

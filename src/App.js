@@ -10,6 +10,7 @@ import Instructive from './components/Instructive';
 import RegisterMaterial from './components/RegisterMaterial'
 import List from './components/List'
 import Schedule from './components/Schedule'
+import InfoUser from './components/InfoUser';
 //Corresponde al Dashboard
 import Dashboard from './screens/Dashboard';
 import ConfirmationDate from './screens/ConfirmationDate';
@@ -17,7 +18,6 @@ import Users from './screens/Users';
 import Signin from './screens/Signin';
 import Collector from './screens/Collector';
 import Appointment from "./screens/Appointment";
-
 
 function App() {
   return (
@@ -31,6 +31,7 @@ function App() {
         <Route exact path="/RegisterMaterial" component={RegisterMaterial}/>
         <Route exact path="/List" component={List}/>
         <Route exact path="/Schedule" component={Schedule}/>
+        <Route exact path="/InfoUser" component={InfoUser}/>
       {/* //Corresponde al Dashboard */}
         <Route exact path="/Home" component={Signin} />
         <Route exact path="/Collector" component={Collector} />

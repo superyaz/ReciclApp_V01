@@ -32,7 +32,7 @@ class List extends React.Component{
 
     onClick = (eventObject) => {
         eventObject.preventDefault();
-        this.props.history.push('/');
+        this.props.history.push('/infoUser');
     }
 
     render(){
@@ -72,7 +72,7 @@ class List extends React.Component{
                                 </table>
                             </div>
                             <div className="row d-flex justify-content-center mt-5">
-                                <button onClick={this.onClick} className="ml-5 mb-5 btn btn-lg">Continuar</button>
+                                <button onClick={this.onClick} className="ml-5 mb-5 btn btn-lg">Finalizar</button>
                             </div>
                         </div>
                     </div>

@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom'
 import '../styles/Confirmation.css'
 
 class Confirmation extends React.Component{
-
-
     render(){
         return(
             <React.Fragment>
@@ -31,9 +29,9 @@ class Confirmation extends React.Component{
                                                 </Link>
                                             </div>
                                         </div>
-                                    </div> 
-                                </div>                      
-                            </div>                                 
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
