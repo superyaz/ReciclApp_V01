@@ -74,19 +74,7 @@ export class Sidenav extends PureComponent {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Exit" >
-                            <NavIcon>
-                                <Link to="/Home">
-                                    <img src="https://image.flaticon.com/icons/svg/25/25376.svg" width="20px" alt="" />
-                                </Link>
-                            </NavIcon>
-                            <NavText>
-                                <Link to="/Home">
-                                    Salir
-                                </Link>
-                            </NavText>
-                        </NavItem>
-
+                        
                         <NavItem eventKey="Configuration">
                             <NavIcon>
                                 <img src="https://image.flaticon.com/icons/svg/60/60473.svg" width="20px" alt="" />
@@ -107,6 +95,35 @@ export class Sidenav extends PureComponent {
                                 </NavText>
                             </NavItem>
                         </NavItem>
+                        
+                        <NavItem eventKey="QR" >
+                            <NavIcon>
+                                <Link to="/QR">
+                                    <img src="https://image.flaticon.com/icons/svg/100/100975.svg" width="20px" alt="" />
+                                </Link>
+                            </NavIcon>
+                            <NavText>
+                                <Link to="/QR">
+                                    QR Usuario
+                                </Link>
+                            </NavText>
+                        </NavItem>
+
+
+
+                        <NavItem eventKey="Exit" >
+                            <NavIcon>
+                                <Link to="/Home">
+                                    <img src="https://image.flaticon.com/icons/svg/25/25376.svg" width="20px" alt="" />
+                                </Link>
+                            </NavIcon>
+                            <NavText>
+                                <Link to="/Home">
+                                    Salir
+                                </Link>
+                            </NavText>
+                        </NavItem>
+
                     </SideNav.Nav>
                 </SideNav>
             </div>

@@ -17,6 +17,7 @@ import Users from './screens/Users';
 import Signin from './screens/Signin';
 import Collector from './screens/Collector';
 import Appointment from "./screens/Appointment";
+import QR from "./screens/QR"
 
 
 function App() {
@@ -32,12 +33,13 @@ function App() {
         <Route exact path="/List" component={List}/>
         <Route exact path="/Schedule" component={Schedule}/>
       {/* //Corresponde al Dashboard */}
-        <Route exact path="/Home" component={Signin} />
-        <Route exact path="/Collector" component={Collector} />
-        <Route exact path="/Dashboard" component={Dashboard} />
-        <Route exact path="/Users" component={Users} />
-        <Route exact path="/ConfirmationDate" component={ConfirmationDate} />
-        <Route exact path="/Appointment" component={Appointment} />
+        <Route exact path="/Home" component={Signin}/>
+        <Route exact path="/Collector" component={Collector}/>
+        <Route exact path="/Dashboard" component={Dashboard}/>
+        <Route exact path="/Users" component={Users}/>
+        <Route exact path="/ConfirmationDate" component={ConfirmationDate}/>
+        <Route exact path="/Appointment" component={Appointment}/>
+        <Route exact path="/QR" component={QR}/>
       </Switch>
     </BrowserRouter>
   );
