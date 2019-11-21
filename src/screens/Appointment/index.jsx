@@ -17,7 +17,7 @@ export class index extends PureComponent {
         this.setState({
             AllUsersAppointments: responseAllUsersAppointments.data.appointments
         });
-        // console.log(this.state.AllUsersAppointments);
+        console.log(this.state.AllUsersAppointments);
     }
 
     render() {
@@ -51,8 +51,8 @@ export class index extends PureComponent {
                                 <td>{usersAppointment.email}</td>
                                 <td>{usersAppointment.neighborhood}</td>
                                 <td>{usersAppointment.addressHome}</td>
-                                <td>INCLUIR</td>
-                                <td>INCLUIR</td>
+                                <td>{usersAppointment.typeMaterial}</td>
+                                <td>{usersAppointment.quantity}</td>
                                 <td><button type="button" className="btn btn-danger btn-ln">Pendiente</button></td>
                             </tr>)})
                       }

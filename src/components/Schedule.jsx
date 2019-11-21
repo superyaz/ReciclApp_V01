@@ -60,8 +60,11 @@ class Schedule extends React.Component {
         startDate: new Date()
       });
 
+      // return console.log(this.state.location);
+
       axios.post('http://localhost:4000/api/schedule/date', {
-        date: this.state.startDate
+        date: this.state.startDate,
+        location_id: this.state.location
        },
        {
         headers: {
@@ -73,12 +76,14 @@ class Schedule extends React.Component {
       this.setState({
         [eventObject.target.name]: eventObject.target.value
     })
-    // console.log(eventObject.target.name, eventObject.target.value);
+    console.log(eventObject.target.name, eventObject.target.value);
     }
 
     onSubmitTwo = async(/* eventObject */) => {
       // eventObject.preventDefault();
       const token = getJwt();
+
+      // return console.log(this.state.location)
 
       axios.post('http://localhost:4000/api/schedule/location', {
         location_id: this.state.location

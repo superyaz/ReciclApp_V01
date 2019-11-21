@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { getJwt } from '../helpers/jwt'
 import axios from 'axios'
 
@@ -59,6 +59,7 @@ class InfoUser extends React.Component{
       appointmentLocation_id: res.data.infoLocation[0].id,
       location: res.data.infoLocation[0].locationName
     })).catch(err => {
+      console.log(err);
       this.props.history.push('/login');
     })
   }
@@ -142,4 +143,4 @@ class InfoUser extends React.Component{
   }
 }
 
-export default InfoUser;
+export default withRouter(InfoUser);

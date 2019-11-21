@@ -14,11 +14,12 @@ router.get('/locations', tokenVerify, async(req, res, next) => {
 });
 
 router.post('/date', tokenVerify, async(req, res, next) => {
-    const { date } = req.body;
+    const { date, location_id } = req.body;
 
     const setDate = {
         client_id: req.usuario.id,
-        dateSchedule: date
+        dateSchedule: date,
+        collectLocation_id: location_id,
     }
 
     await poolConnection.query('INSERT INTO appointments SET ?', [setDate]);

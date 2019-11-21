@@ -66,7 +66,7 @@ class RegisterMaterial extends React.Component{
         );
 
         Quagga.onDetected(data => {
-            console.log(data);
+            // console.log(data);
             document.querySelector("#codigo").innerHTML = data.codeResult.code;
             this.setState({
                 codigoScanner: data.codeResult.code
@@ -105,8 +105,30 @@ class RegisterMaterial extends React.Component{
         }).then(res => console.log(res.data.ok))
     }
 
+    onSubmitTwo = async() => {
+        this.setState({
+            codigoScanner: '',
+            // typeMaterial: '',
+            quantityofproducts: ''
+        });
+        document.querySelector("#codigo").innerHTML = '';
+
+        const token = getJwt();
+        axios.post('http://localhost:4000/api/material/createMaterial', {
+            codigoScanner: this.state.codigoScanner,
+            quantity: this.state.quantityofproducts,
+            typeMaterial_id: this.state.typeMaterial
+        },
+        {
+            headers: {
+                token: `${token}`
+            }
+        }).then(res => console.log(res.data.ok))
+    }
+
     onClick = (eventObject) => {
         eventObject.preventDefault();
+        this.onSubmitTwo();
         this.props.history.push('/List');
       }
 
@@ -137,12 +159,12 @@ class RegisterMaterial extends React.Component{
                                     <div id="codigo" className="d-flex justify-content-center"></div>
                                 </div>
                             </div>
-                            <div className="form-group row">
+                            {/* <div className="form-group row">
                                 <div className="col-12">
                                     <h6>Codigo de Barra</h6>
                                     <input type="text" className="form-control"/>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="form-group row">
                                 <div className="col-12">
                                     <h6>Tipo de Material</h6>
@@ -162,11 +184,15 @@ class RegisterMaterial extends React.Component{
                                     <input onChange={this.onSelectAndInputChange} value={this.state.quantityofproducts} name="quantityofproducts" type="text" className="form-control" required/>
                                 </div>
                             </div>
-                            <div className="form-group row d-flex justify-content-center mt-3 mb-5">
-                                <button  type="submit" className="btn btn-ln btn-registrarse" name="registrarse">Scannear Otro Material</button>
-                                <button onClick={this.onClick} type="submit" className="btn btn-ln btn-registrarse ml-5" name="registrarse">Listar Materiales</button>
+                            <div className="form-group row d-flex justify-content-center mt-3 mb-3">
+                                <button  type="submit" className="btn btn-ln btn-registrarse" name="registrarse">Scannear Otro Material</button>              
                             </div>
                         </form>
+                        <div className="form-group row d-flex justify-content-center mb-5">
+                            <form onSubmit={this.onSubmitTwo}>
+                                <button onClick={this.onClick} type="submit" className="btn btn-ln btn-registrarse ml-5" name="registrarse">Listar Materiales</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -51,8 +51,8 @@ export class index extends PureComponent {
                       <td>{usersConfirmed.email}</td>
                       <td>{usersConfirmed.neighborhood}</td>
                       <td>{usersConfirmed.addressHome}</td>
-                      <td>INCLUIR</td>
-                      <td>INCLUIR</td>
+                      <td>{usersConfirmed.typeMaterial}</td>
+                      <td>{usersConfirmed.quantity}</td>
                       <td><button type="button" className="btn btn-outline-success btn-ln">Confirmado</button></td>
                   </tr>)})
             }
