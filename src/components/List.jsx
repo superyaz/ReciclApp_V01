@@ -1,10 +1,39 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import '../styles/List.css'
-
-
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { getJwt } from '../helpers/jwt';
+import axios from 'axios';
+import '../styles/List.css';
 
 class List extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            productsList: []
+        }
+    }
+
+    componentDidMount() {
+        const token = getJwt();
+
+        if(!token){
+            return this.props.history.push('/login');
+        }
+
+        axios.get('http://localhost:4000/api/product/listProducts', {
+            headers: {
+                token: `${token}`
+            }
+        }).then(res => this.setState({
+            productsList: res.data.productsDB
+        })).catch(err => {
+            this.props.history.push('/login');
+        })
+    }
+
+    onClick = (eventObject) => {
+        eventObject.preventDefault();
+        this.props.history.push('/infoUser');
+    }
 
     render(){
         return(
@@ -24,40 +53,33 @@ class List extends React.Component{
                                             <th className="text-center">Codigo de Barra</th>
                                             <th className="text-center">Material</th>
                                             <th className="text-center">Cantidad</th>
-                                            <th className="text-center">Agregar</th>
-                                            <th className="text-center">Eliminar</th>
-                                            
                                         </tr>
                                     </thead>
-
                                     <tbody>
-                                        <tr>
-                                            <th className="text-center"></th>
-                                            <th className="text-center">vidrio</th>
-                                            <th className="text-center">10</th>
-                                            <th className="text-center"><button type="submit" className="btn btn-editar">Agregar</button></th>
-
-                                            <th className="text-center"><button type="submit" className="btn btn-eliminar">Eliminar</button></th>
-                                        </tr>
-                                        <tr>
-                                            <th className="text-center">1</th>
-                                            <th className="text-center">vidrio</th>
-                                            <th className="text-center">10</th>
-                                            <th className="text-center"><button type="submit" className="btn btn-editar">Agregar</button></th>
-
-                                            <th className="text-center"><button type="submit" className="btn btn-eliminar">Eliminar</button></th>
-                                        </tr>
-                                    
+                                        {
+                                            this.state.productsList.map(listMaterial => {
+                                                return(
+                                                    <tr key={listMaterial.id}>
+                                                        <th className="text-center">{listMaterial.codigoBarra}</th>
+                                                        <th className="text-center">{listMaterial.typeMaterial}</th>
+                                                        <th className="text-center">{listMaterial.quantity}</th>
+                                                        {/* <th className="text-center"><button type="submit" className="btn btn-eliminar">Eliminar</button></th> */}
+                                                    </tr>
+                                                )
+                                            })
+                                        }
                                     </tbody>
-                                </table> 
+                                </table>
                             </div>
-                            <div className="row d-flex justify-content-center mt-5"><button type="submit" className="btn btn-lg">Culminado</button></div>
+                            <div className="row d-flex justify-content-center mt-5">
+                                <button onClick={this.onClick} className="ml-5 mb-5 btn btn-lg">Finalizar</button>
+                            </div>
                         </div>
                     </div>
-                </div>  
+                </div>
             </React.Fragment>
         )
     }
 }
 
-export default List;
+export default withRouter(List);

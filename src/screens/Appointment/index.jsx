@@ -1,83 +1,65 @@
 import React, { PureComponent } from 'react';
 import Header from '../common/components/Header';
 import Sidenav from '../common/components/Sidenav';
+import axios from 'axios';
 
 export class index extends PureComponent {
-    render() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            AllUsersAppointments: []
+        }
+    }
 
+    async componentDidMount() {
+        const responseAllUsersAppointments = await axios('http://localhost:4000/api/getAppointments/appointments');
+
+        this.setState({
+            AllUsersAppointments: responseAllUsersAppointments.data.appointments
+        });
+        console.log(this.state.AllUsersAppointments);
+    }
+
+    render() {
         return (
             <div>
                 <Header />
                 <Sidenav />
-                <div className="mt-5 container">
-
-                    <div className="table-responsive">
-                        <table className="table table-striped table-sm mt-5">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-
-                                    <th>Id</th>
-
-                                    <th>Fecha</th>
-
-                                    <th>Dirección</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1,001</td>
-
-                                    <td>3607</td>
-
-                                    <td>06-10-2020</td>
-
-                                    <td>262 17ºC</td>
-                                </tr>
-                                <tr>
-                                    <td>1,002</td>
-
-                                    <td>2305  </td>
-
-                                    <td>01-11-2019</td>
-                                    <td>185B</td>
-                                </tr>
-                                <tr>
-                                    <td>1,003</td>
-
-                                    <td>4463</td>
-
-                                    <td>06-04-2022</td>
-
-                                    <td>231 14ºB</td>
-                                </tr>
-                                <tr>
-                                    <td>1,003</td>
-
-                                    <td>2944</td>
-
-                                    <td>17-03-2022</td>
-
-                                    <td>209B 19ºF</td>
-                                </tr>
-                                <tr>
-                                    <td>1,004</td>
-
-                                    <td>2537</td>
-
-                                    <td>15-12-2019</td>
-
-                                    <td>209B 19ºF</td>
-                                </tr>
-
-
-                            </tbody>
-                        </table>
-                    </div>
-
+                <div className="container text-center mt-5">
+                    <table className="table">
+                      <thead className="thead-dark">
+                        <tr>
+                          <th scope="col">Tipo Documento</th>
+                          <th scope="col">Numero Documento</th>
+                          <th scope="col">Nombre Completo</th>
+                          <th scope="col">Correo Electronico</th>
+                          <th scope="col">Barrio</th>
+                          <th scope="col">Direccion</th>
+                          <th scope="col">Cantidad</th>
+                          <th scope="col">Tipo Material</th>
+                          <th scope="col">Solicitud</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      {
+                        this.state.AllUsersAppointments.map(usersAppointment => {
+                          return (
+                            <tr key={usersAppointment.id}>
+                                <td>{usersAppointment.typeDocument}</td>
+                                <td>{usersAppointment.numberDocument}</td>
+                                <td>{usersAppointment.fullName}</td>
+                                <td>{usersAppointment.email}</td>
+                                <td>{usersAppointment.neighborhood}</td>
+                                <td>{usersAppointment.addressHome}</td>
+                                <td>{usersAppointment.typeMaterial}</td>
+                                <td>{usersAppointment.quantity}</td>
+                                <td><button type="button" className="btn btn-danger btn-ln">Pendiente</button></td>
+                            </tr>)})
+                      }
+                      </tbody>
+                    </table>
                 </div>
             </div>
-
         );
     }
 }

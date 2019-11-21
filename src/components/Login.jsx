@@ -1,7 +1,7 @@
-import React from 'react'
-import '../styles/Login.css'
-import axios from 'axios'
-
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/Login.css';
 
 class Login extends React.Component{
     constructor(props){
@@ -11,22 +11,18 @@ class Login extends React.Component{
            password: ''
        }
     }
-
-    onSubmit = async(eventObject) => {
-        eventObject.preventDefault();
-        
-        /* Enviando la data al backend */
-        const tableLoginUsers = {
-            email: this.state.email,
-            password: this.state.password
-        }
-
+    
+    onSubmit = () => {
+        // eventObject.preventDefault();
         this.setState({
             email: '',
             password: ''
         });
 
-        await axios.post('http://localhost:4000/api/authentication/signin', tableLoginUsers);
+        axios.post('http://localhost:4000/api/loginVerify/loginUser', {
+            email: this.state.email,
+            password: this.state.password
+        }).then(res => localStorage.setItem('token', res.data.token));
     }
 
     onInputChange = (eventObject) => {
@@ -34,6 +30,12 @@ class Login extends React.Component{
             [eventObject.target.name]: eventObject.target.value
         });
         // console.log(eventObject.target.name, eventObject.target.value);
+    }
+
+    onClick = (eventObject) => {
+        eventObject.preventDefault();
+        this.onSubmit();
+        this.props.history.push('/instructive');
     }
 
     render(){
@@ -51,11 +53,11 @@ class Login extends React.Component{
                                 <input onChange={this.onInputChange} value={this.state.password} type="password" className="form-control" name="password" placeholder="Contraseña" required/>
                             </div>
                             <div className="form-group">
-                                    <button type="submit" className="form-control btn btn-lg" name="button">Entrar</button>        
+                                <button onClick={this.onClick} type="submit" className="form-control btn btn-lg" name="button">Entrar</button>
                             </div>
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <a href="/register" className="text-muted d-flex justify-content-center">¿Olvidaste la contraseña?</a>
-                            </div> 
+                            </div>  */}
                         </form>
                     </div>
                 </div>
@@ -63,7 +65,6 @@ class Login extends React.Component{
         </React.Fragment>
         )
     }
-  
 }
 
-export default Login;
+export default withRouter(Login);

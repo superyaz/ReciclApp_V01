@@ -1,8 +1,25 @@
 import React, { PureComponent } from 'react';
 import Header from '../common/components/Header';
 import Sidenav from '../common/components/Sidenav';
+import axios from 'axios';
 
 export class index extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      AllUsersConfirmed: []
+    }
+  }
+
+  async componentDidMount() {
+    const responseAllUsersConfirmed = await axios.get('http://localhost:4000/api/getAppointments/appointments');
+
+    this.setState({
+      AllUsersConfirmed: responseAllUsersConfirmed.data.appointments
+    });
+    // console.log(this.state.AllUsersConfirmed);
+  }
+
   render() {
     return (
       <div>
@@ -12,35 +29,33 @@ export class index extends PureComponent {
           <table className="table">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">id</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Direccón</th>
+                <th scope="col">Tipo Documento</th>
+                <th scope="col">Numero Documento</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Correo Electronico</th>
+                <th scope="col">Barrio</th>
+                <th scope="col">Direccion</th>
+                <th scope="col">Cantidad</th>
+                <th scope="col">Tipo Material</th>
                 <th scope="col">Solicitud</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>08-06-2020</td>
-                <td>149 15ºG</td>
-                <td><button type="button" className="btn btn-outline-success btn-ln">Confirmar</button></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>04-09-2020</td>
-                <td>261A 6ºB</td>
-                <td><button type="button" className="btn btn-outline-success">Confirmar</button></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>09-02-2020</td>
-                <td>261A 6ºB</td>
-                <td><button type="button" className="btn btn-outline-success">Confirmar</button></td>
-              </tr>
+            {
+              this.state.AllUsersConfirmed.map(usersConfirmed => {
+                return (
+                  <tr key={usersConfirmed.id}>
+                      <td>{usersConfirmed.typeDocument}</td>
+                      <td>{usersConfirmed.numberDocument}</td>
+                      <td>{usersConfirmed.fullName}</td>
+                      <td>{usersConfirmed.email}</td>
+                      <td>{usersConfirmed.neighborhood}</td>
+                      <td>{usersConfirmed.addressHome}</td>
+                      <td>{usersConfirmed.typeMaterial}</td>
+                      <td>{usersConfirmed.quantity}</td>
+                      <td><button type="button" className="btn btn-outline-success btn-ln">Confirmado</button></td>
+                  </tr>)})
+            }
             </tbody>
           </table>
         </div>

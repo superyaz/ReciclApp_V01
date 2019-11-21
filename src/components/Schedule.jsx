@@ -1,18 +1,47 @@
 import React from 'react';
 import DatePicker from 'react-datepicker';
-import {Link} from 'react-router-dom';
-import "react-datepicker/dist/react-datepicker.css";
-import "../styles/Schedule.css"
+import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
 import { getDay } from 'date-fns';
+import { getJwt } from '../helpers/jwt';
+import axios from 'axios';
+import "react-datepicker/dist/react-datepicker.css";
+import "../styles/Schedule.css";
 
 class Schedule extends React.Component {
-  state = {
-      startDate: null
-    };
-  
-    isWeekDay = date =>{
+  constructor(props){
+    super(props);
+    this.state = {
+      startDate: new Date(),
+      locations: [],
+
+      /* Name que se envia al Backend */
+      location: ''
+    }
+  }
+
+  async componentDidMount() {
+    const token = getJwt();
+
+    if(!token){
+      return this.props.history.push('/login');
+    }
+
+    axios.get('http://localhost:4000/api/schedule/locations', {
+        headers: {
+            token: `${token}`
+        }
+    }).then(res => this.setState({
+      locations: res.data.locationsDB,
+      location: res.data.locationsDB[0].id
+    })).catch(err => { 
+      console.log(err);
+      this.props.history.push('/login');
+    })
+  }
+
+    isWeekDay = date => {
       const day = getDay(date);
       return day !== 0 && day !== 6
     }
@@ -23,6 +52,59 @@ class Schedule extends React.Component {
       });
     };
 
+    onSubmit = async(/* eventObject */) => {
+      // eventObject.preventDefault();
+      const token = getJwt();
+
+      this.setState({
+        startDate: new Date()
+      });
+
+      // return console.log(this.state.location);
+
+      axios.post('http://localhost:4000/api/schedule/date', {
+        date: this.state.startDate,
+        location_id: this.state.location
+       },
+       {
+        headers: {
+          token: `${token}`
+      }}).then(res => console.log(res.data.ok));
+    }
+
+    onSelectChange = (eventObject) => {
+      this.setState({
+        [eventObject.target.name]: eventObject.target.value
+    })
+    console.log(eventObject.target.name, eventObject.target.value);
+    }
+
+    onSubmitTwo = async(/* eventObject */) => {
+      // eventObject.preventDefault();
+      const token = getJwt();
+
+      // return console.log(this.state.location)
+
+      axios.post('http://localhost:4000/api/schedule/location', {
+        location_id: this.state.location
+       },
+       {
+        headers: {
+          token: `${token}`
+      }}).then(res => console.log(res.data.ok));
+    }
+    
+    onClick = (eventObject) => {
+      eventObject.preventDefault();
+      this.onSubmit();
+      this.props.history.push('/RegisterMaterial');
+    }
+
+    onClickTwo = (eventObject) => {
+      eventObject.preventDefault();
+      this.onSubmitTwo();
+      this.props.history.push('/RegisterMaterial');
+    }
    
     render() {
       return (
@@ -43,87 +125,49 @@ class Schedule extends React.Component {
                       </li>
                     </ul>
                 <div className="row d-flex justify-content-center mt-3">
-                  <DatePicker className="form-control" selected={this.state.startDate} filterDate={this.isWeekDay} onChange={this.handleChange}/>
-                  <button type="submit"  className="btn btn-md ml-2 btn-date">Agendar</button>
+                  <form onSubmit={this.onSubmit}>
+                    <DatePicker className="form-control" selected={this.state.startDate} filterDate={this.isWeekDay} onChange={this.handleChange}/>
+                    <button onClick={this.onClick} type="submit" className="btn btn-md ml-2 btn-date">Agendar</button>
+                  </form>
                 </div>
                 <hr/>
                 <div>
                   <ul>
                     <li>
-                      <h6 className="mb-2">Puntos de Recolección</h6>
+                      <h6 className="mb-2">Puntos de Recolección <span><FontAwesomeIcon icon={faMapMarkerAlt}/></span></h6>
                     </li>
                   </ul>
                 </div>
                 <div className="row locate d-flex justify-content-center mt-4">
-                  <div className="col-6">
-                    <ul>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Av38 #Dg55 Bello</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Crr64C #89 Medellín</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Crr52 #73 Medellín</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Cll 67 #52-20 Medellín</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Cll46 #51 Medellín</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Cll47D #70 Laureles</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Av80 #46 Belén</h6>
-                      </li>
-                      <li>
-                        <FontAwesomeIcon icon={faMapMarkerAlt}/><h6>Av Las Vegas #10 Poblado</h6>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="col-3">
-                    <ul>
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                      <li>
-                        <button type="submit" className="btn btn-sm ml-5">Seleccionar</button>
-                      </li>  
-                    </ul>
-                    
-                  </div>
+                  <form onSubmit={this.onSubmitTwo} className="container text-center d-flex justify-content-center">
+                    <div className="col-md-6">
+                      <table className="table">
+                        <thead className="thead-dark" >
+                          <tr>
+                            <th scope="col">Direcciones</th>
+                          </tr>
+                        </thead>
+                      </table>
+                      <select onChange={this.onSelectChange} name="location" className="form-control mb-4" required>
+                          {
+                              this.state.locations.map(locationAddress => 
+                              <option key={locationAddress.id} value={locationAddress.id}>
+                                  {locationAddress.locationName}
+                              </option>)
+                          }
+                      </select>
+                    </div>
+                    <div className="mt-3">
+                      <button onClick={this.onClickTwo} type="submit" className="mt-5 btn btn-md btn-date">Seleccionar</button>
+                    </div>
+                  </form>
                 </div>
-
-                <div className="row d-flex justify-content-center mt-5 mb-3">
-                  <button type="submit"  className="btn btn-lg ml-2 btn-next">Continuar</button>
-                </div>
-            </div>
+              </div>
             </div>
           </div>
-        </React.Fragment>        
+        </React.Fragment>
       );
     }
 }
- 
 
-export default Schedule;
+export default withRouter(Schedule);

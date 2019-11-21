@@ -1,9 +1,8 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import '../styles/Instructive.css'
+import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import '../styles/Instructive.css';
 
 class Instructive extends React.Component{
-
     render(){
         return(
             <React.Fragment>
@@ -24,21 +23,21 @@ class Instructive extends React.Component{
                                     <ul>
                                         <li className="ml-5">Bolsa para el almacenamiento de materiales de reciclaje.</li>
                                         <li className="ml-5">Pad magnético con el instructivo resumido de separación y clasificación de reciclaje</li>
-                                    </ul>                          
-                                </div>         
+                                    </ul>
+                                </div>
                             </div>
 
                             <div className="row justify-content-center mb-4">
-                                <Link to='/RegisterMaterial'>
-                                    <button type="submit" className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Registro de Material</button>
+                                <Link to='/Schedule'>
+                                    <button className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Agendar O Entregar Personalmente</button>
                                 </Link>
-                            </div>  
+                            </div>
                         </div>
                     </div>
-                </div> 
+                </div>
             </React.Fragment>
         )
     }
 }
 
-export default Instructive;
+export default withRouter(Instructive);
