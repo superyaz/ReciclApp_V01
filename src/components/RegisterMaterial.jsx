@@ -131,7 +131,7 @@ class RegisterMaterial extends React.Component{
 
         this.onSubmitTwo();
         setTimeout(() => {
-           this.onClickFinal() 
+           this.onClickFinal();
         }, 1000);
       }
 
