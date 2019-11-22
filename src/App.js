@@ -33,12 +33,12 @@ function App() {
         <Route exact path="/Schedule" component={Schedule}/>
         <Route exact path="/InfoUser" component={InfoUser}/>
       {/* //Corresponde al Dashboard */}
-        <Route exact path="/Home" component={Signin} />
-        <Route exact path="/Collector" component={Collector} />
-        <Route exact path="/Dashboard" component={Dashboard} />
-        <Route exact path="/Users" component={Users} />
-        <Route exact path="/ConfirmationDate" component={ConfirmationDate} />
-        <Route exact path="/Appointment" component={Appointment} />
+        <Route exact path="/Home" component={Signin}/>
+        <Route exact path="/Collector" component={Collector}/>
+        <Route exact path="/Dashboard" component={Dashboard}/>
+        <Route exact path="/Users" component={Users}/>
+        <Route exact path="/ConfirmationDate" component={ConfirmationDate}/>
+        <Route exact path="/Appointment" component={Appointment}/>
       </Switch>
     </BrowserRouter>
   );

@@ -10,3 +10,9 @@ th{
     background-color: rgb(201, 28, 28) !important;
     color: #fff !important;
 }
+
+.th-list{
+    background-color: #33b924b9 !important;
+    color: #fff;
+    font-size: 18px;
+}

@@ -50,9 +50,9 @@ class List extends React.Component{
                                 <table className="table">
                                     <thead>
                                         <tr>
-                                            <th className="text-center">Codigo de Barra</th>
-                                            <th className="text-center">Material</th>
-                                            <th className="text-center">Cantidad</th>
+                                            <th className="text-center th-list">Codigo de Barra</th>
+                                            <th className="text-center th-list">Material</th>
+                                            <th className="text-center th-list">Cantidad</th>
                                         </tr>
                                     </thead>
                                     <tbody>

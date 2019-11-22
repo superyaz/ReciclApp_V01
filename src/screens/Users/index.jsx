@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import Header from '../common/components/Header';
 import Sidenav from '../common/components/Sidenav';
+import '../Users/styles.css';
 import axios from 'axios';
 
 export class index extends PureComponent {
@@ -29,12 +30,12 @@ export class index extends PureComponent {
                 <div className="mt-5 container">
                     <div className="table-responsive">
                         <table className="table table-striped table-sm mt-5">
-                            <thead>
+                            <thead className="thead-dark">
                                 <tr>
-                                    <th>Numero Documento</th>
-                                    <th>Nombre Completo</th>
-                                    <th>Correo Electronico</th>
-                                    <th>Fecha Registro</th>
+                                    <th className="text-center th-user">Numero Documento</th>
+                                    <th className="text-center th-user">Nombre Completo</th>
+                                    <th className="text-center th-user">Correo Electronico</th>
+                                    <th className="text-center th-user">Fecha Registro</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,10 +43,10 @@ export class index extends PureComponent {
                                     this.state.AllUsersRegistered.map( users => {
                                         return (
                                             <tr key={users.id}>
-                                                <td>{users.numberDocument}</td>
-                                                <td>{users.fullName}</td>
-                                                <td>{users.email}</td>
-                                                <td>{users.created_at}</td>
+                                                <td className="text-center">{users.numberDocument}</td>
+                                                <td className="text-center">{users.fullName}</td>
+                                                <td className="text-center">{users.email}</td>
+                                                <td className="text-center">{users.created_at}</td>
                                             </tr>)})
                                 }
                             </tbody>

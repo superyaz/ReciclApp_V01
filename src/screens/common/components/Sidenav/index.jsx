@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Link } from "react-router-dom";
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 
+
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import "./styles.css"
@@ -87,26 +88,6 @@ export class Sidenav extends PureComponent {
                             </NavText>
                         </NavItem>
 
-                        <NavItem eventKey="Configuration">
-                            <NavIcon>
-                                <img src="https://image.flaticon.com/icons/svg/60/60473.svg" width="20px" alt="" />
-                            </NavIcon>
-                            <NavText>
-                                Configuración
-                            </NavText>
-
-                            <NavItem eventKey="charts/linechart">
-                                <NavText>
-                                    Line Chart
-                                </NavText>
-                            </NavItem>
-
-                            <NavItem eventKey="charts/barchart">
-                                <NavText>
-                                    Bar Chart
-                                </NavText>
-                            </NavItem>
-                        </NavItem>
                     </SideNav.Nav>
                 </SideNav>
             </div>

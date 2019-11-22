@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import Header from '../common/components/Header';
 import Sidenav from '../common/components/Sidenav';
+import QRCode from 'qrcode.react'
+import '../Appointment/styles.css';
 import axios from 'axios';
 
 export class index extends PureComponent {
@@ -19,6 +21,8 @@ export class index extends PureComponent {
         });
         console.log(this.state.AllUsersAppointments);
     }
+    
+
 
     render() {
         return (
@@ -29,15 +33,16 @@ export class index extends PureComponent {
                     <table className="table">
                       <thead className="thead-dark">
                         <tr>
-                          <th scope="col">Tipo Documento</th>
-                          <th scope="col">Numero Documento</th>
-                          <th scope="col">Nombre Completo</th>
-                          <th scope="col">Correo Electronico</th>
-                          <th scope="col">Barrio</th>
-                          <th scope="col">Direccion</th>
-                          <th scope="col">Cantidad</th>
-                          <th scope="col">Tipo Material</th>
-                          <th scope="col">Solicitud</th>
+                          <th className="text-center th-appointment">Tipo Documento</th>
+                          <th className="text-center th-appointment">Numero Documento</th>
+                          <th className="text-center th-appointment">Nombre Completo</th>
+                          <th className="text-center th-appointment">Correo Electronico</th>
+                          <th className="text-center th-appointment">Barrio</th>
+                          <th className="text-center th-appointment">Direccion</th>
+                          <th className="text-center th-appointment">Tipo Material</th>
+                          <th className="text-center th-appointment">Cantidad</th>
+                          <th className="text-center th-appointment">QR</th>
+                          <th className="text-center th-appointment">Solicitud</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -45,15 +50,16 @@ export class index extends PureComponent {
                         this.state.AllUsersAppointments.map(usersAppointment => {
                           return (
                             <tr key={usersAppointment.id}>
-                                <td>{usersAppointment.typeDocument}</td>
-                                <td>{usersAppointment.numberDocument}</td>
-                                <td>{usersAppointment.fullName}</td>
-                                <td>{usersAppointment.email}</td>
-                                <td>{usersAppointment.neighborhood}</td>
-                                <td>{usersAppointment.addressHome}</td>
-                                <td>{usersAppointment.typeMaterial}</td>
-                                <td>{usersAppointment.quantity}</td>
-                                <td><button type="button" className="btn btn-danger btn-ln">Pendiente</button></td>
+                                <td className="text-center">{usersAppointment.typeDocument}</td>
+                                <td className="text-center">{usersAppointment.numberDocument}</td>
+                                <td className="text-center">{usersAppointment.fullName}</td>
+                                <td className="text-center">{usersAppointment.email}</td>
+                                <td className="text-center">{usersAppointment.neighborhood}</td>
+                                <td className="text-center">{usersAppointment.addressHome}</td>
+                                <td className="text-center">{usersAppointment.typeMaterial}</td>
+                                <td className="text-center">{usersAppointment.quantity}</td>
+                                <td className="text-center"><QRCode value={usersAppointment.id}/></td>
+                                <td className="text-center"><button type="button" className="btn btn-danger btn-ln">Pendiente</button></td>
                             </tr>)})
                       }
                       </tbody>

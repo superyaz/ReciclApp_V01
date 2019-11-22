@@ -119,6 +119,9 @@ class Schedule extends React.Component {
                     </Link>
                   </div>
                 </div>
+                <div className="row d-flex justify-content-center mb-5">
+                  <h3>Seleccione el metodo que desee para realizar su recolección</h3>
+                </div>
                     <ul>
                       <li>
                         <h6 className="mb-2">Recolección Domestica</h6>
@@ -141,13 +144,6 @@ class Schedule extends React.Component {
                 <div className="row locate d-flex justify-content-center mt-4">
                   <form onSubmit={this.onSubmitTwo} className="container text-center d-flex justify-content-center">
                     <div className="col-md-6">
-                      <table className="table">
-                        <thead className="thead-dark" >
-                          <tr>
-                            <th scope="col">Direcciones</th>
-                          </tr>
-                        </thead>
-                      </table>
                       <select onChange={this.onSelectChange} name="location" className="form-control mb-4" required>
                           {
                               this.state.locations.map(locationAddress => 
