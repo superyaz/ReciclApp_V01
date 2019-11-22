@@ -105,7 +105,7 @@ class RegisterMaterial extends React.Component{
         }).then(res => console.log(res.data.ok))
     }
 
-    onSubmitTwo = async() => {
+    onSubmitTwo = () => {
         this.setState({
             codigoScanner: '',
             // typeMaterial: '',
@@ -128,7 +128,14 @@ class RegisterMaterial extends React.Component{
 
     onClick = (eventObject) => {
         eventObject.preventDefault();
+
         this.onSubmitTwo();
+        setTimeout(() => {
+           this.onClickFinal() 
+        }, 1000);
+      }
+
+      onClickFinal = () => {
         this.props.history.push('/List');
       }
 
