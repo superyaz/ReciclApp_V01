@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import Header from '../common/components/Header';
 import Sidenav from '../common/components/Sidenav';
 import axios from 'axios';
+import '../ConfirmationDate/styles.css'
 
 export class index extends PureComponent {
   constructor(props) {
@@ -29,15 +30,15 @@ export class index extends PureComponent {
           <table className="table">
             <thead className="thead-dark">
               <tr>
-                <th scope="col">Tipo Documento</th>
-                <th scope="col">Numero Documento</th>
-                <th scope="col">Nombre Completo</th>
-                <th scope="col">Correo Electronico</th>
-                <th scope="col">Barrio</th>
-                <th scope="col">Direccion</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Tipo Material</th>
-                <th scope="col">Solicitud</th>
+                <th className="text-center th-confirmationdate">Tipo Documento</th>
+                <th className="text-center th-confirmationdate">Numero Documento</th>
+                <th className="text-center th-confirmationdate">Nombre Completo</th>
+                <th className="text-center th-confirmationdate">Correo Electronico</th>
+                <th className="text-center th-confirmationdate">Barrio</th>
+                <th className="text-center th-confirmationdate">Direccion</th>
+                <th className="text-center th-confirmationdate">Tipo Material</th>
+                <th className="text-center th-confirmationdate">Cantidad</th>
+                <th className="text-center th-confirmationdate">Solicitud</th>
               </tr>
             </thead>
             <tbody>
@@ -45,15 +46,15 @@ export class index extends PureComponent {
               this.state.AllUsersConfirmed.map(usersConfirmed => {
                 return (
                   <tr key={usersConfirmed.id}>
-                      <td>{usersConfirmed.typeDocument}</td>
-                      <td>{usersConfirmed.numberDocument}</td>
-                      <td>{usersConfirmed.fullName}</td>
-                      <td>{usersConfirmed.email}</td>
-                      <td>{usersConfirmed.neighborhood}</td>
-                      <td>{usersConfirmed.addressHome}</td>
-                      <td>{usersConfirmed.typeMaterial}</td>
-                      <td>{usersConfirmed.quantity}</td>
-                      <td><button type="button" className="btn btn-outline-success btn-ln">Confirmado</button></td>
+                      <td className="text-center">{usersConfirmed.typeDocument}</td>
+                      <td className="text-center">{usersConfirmed.numberDocument}</td>
+                      <td className="text-center">{usersConfirmed.fullName}</td>
+                      <td className="text-center">{usersConfirmed.email}</td>
+                      <td className="text-center">{usersConfirmed.neighborhood}</td>
+                      <td className="text-center">{usersConfirmed.addressHome}</td>
+                      <td className="text-center">{usersConfirmed.typeMaterial}</td>
+                      <td className="text-center">{usersConfirmed.quantity}</td>
+                      <td className="text-center"><button type="button" className="btn btn-outline-success btn-ln">Confirmado</button></td>
                   </tr>)})
             }
             </tbody>

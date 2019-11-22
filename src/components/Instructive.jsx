@@ -23,13 +23,17 @@ class Instructive extends React.Component{
                                     <ul>
                                         <li className="ml-5">Bolsa para el almacenamiento de materiales de reciclaje.</li>
                                         <li className="ml-5">Pad magnético con el instructivo resumido de separación y clasificación de reciclaje</li>
+                                        <li className="ml-5">Etiquetas con el codigo QR que deberá colocar en el bolsillo superior de su bolsa y que tiene sus datos, para ser identificado por el recolector</li>
                                     </ul>
+
+
+                                    <p>A continuación tendra la opción de elegir si desee que el material a reciclar sea buscado en su hogar ó llevarlo a un punto de recolección cercano.</p>
                                 </div>
                             </div>
 
                             <div className="row justify-content-center mb-4">
                                 <Link to='/Schedule'>
-                                    <button className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Agendar O Entregar Personalmente</button>
+                                    <button className="form-control btn btn-lg btn-register-material" name="RegisterMaterial">Continuar</button>
                                 </Link>
                             </div>
                         </div>

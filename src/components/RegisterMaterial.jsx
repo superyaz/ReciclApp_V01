@@ -185,12 +185,12 @@ class RegisterMaterial extends React.Component{
                                 </div>
                             </div>
                             <div className="form-group row d-flex justify-content-center mt-3 mb-3">
-                                <button  type="submit" className="btn btn-ln btn-registrarse" name="registrarse">Scannear Otro Material</button>              
+                                <button  type="submit" className="btn btn-lg btn-registrarse" name="registrarse">Scannear Otro Material</button>              
                             </div>
                         </form>
-                        <div className="form-group row d-flex justify-content-center mb-5">
+                        <div className="form-group row d-flex justify-content-center mr-4 mb-5">
                             <form onSubmit={this.onSubmitTwo}>
-                                <button onClick={this.onClick} type="submit" className="btn btn-ln btn-registrarse ml-5" name="registrarse">Listar Materiales</button>
+                                <button onClick={this.onClick} type="submit" className="btn btn-lg btn-registrarse ml-5" name="registrarse">Listar Materiales</button>
                             </form>
                         </div>
                     </div>
