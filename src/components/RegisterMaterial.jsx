@@ -44,15 +44,15 @@ class RegisterMaterial extends React.Component{
               name: "Live",
               type: "LiveStream",
               constraints: {
-                width: "790",
-                height: "490"
+                width: "500",
+                height: "500"
               },
               numberOfWorkers: navigator.hardwareConcurrency,
               target: document.querySelector("#barcodescan")
             },  
             locate: true,
             decoder: {
-              readers: ["code_128_reader","upc_reader", "upc_e_reader"]
+              readers: ['ean_reader']
             }
           },
           function(err) {
@@ -62,11 +62,12 @@ class RegisterMaterial extends React.Component{
             }
             console.log("Initialization finished. Ready to start");
             Quagga.start();
+            /* "code_128_reader","upc_reader", "upc_e_reader" */
           }
         );
 
         Quagga.onDetected(data => {
-            // console.log(data);
+            console.log(data);
             document.querySelector("#codigo").innerHTML = data.codeResult.code;
             this.setState({
                 codigoScanner: data.codeResult.code
